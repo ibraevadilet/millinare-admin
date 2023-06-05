@@ -33,29 +33,31 @@ class EnjoyDetailScreen extends StatelessWidget {
             child: Column(
               children: [
                 const SizedBox(height: 12),
-                CachedNetworkImage(
-                  imageUrl: model.image,
-                  placeholder: (_, url) {
-                    return SizedBox(
-                      width: getWidth(context),
-                      height: 200,
-                      child: Shimmer.fromColors(
-                        baseColor: Colors.grey.withOpacity(0.4),
-                        highlightColor: Colors.white,
-                        child: Container(
-                          decoration: const BoxDecoration(
-                            color: Colors.grey,
+                Flexible(
+                  child: CachedNetworkImage(
+                    imageUrl: model.image,
+                    placeholder: (_, url) {
+                      return SizedBox(
+                        width: getWidth(context),
+                        height: 200,
+                        child: Shimmer.fromColors(
+                          baseColor: Colors.grey.withOpacity(0.4),
+                          highlightColor: Colors.white,
+                          child: Container(
+                            decoration: const BoxDecoration(
+                              color: Colors.grey,
+                            ),
                           ),
                         ),
-                      ),
-                    );
-                  },
-                  imageBuilder: (_, imageProvider) {
-                    return CachedNetworkImage(
-                      imageUrl: model.image,
-                      width: getWidth(context),
-                    );
-                  },
+                      );
+                    },
+                    imageBuilder: (_, imageProvider) {
+                      return CachedNetworkImage(
+                        imageUrl: model.image,
+                        width: getWidth(context),
+                      );
+                    },
+                  ),
                 ),
                 const SizedBox(height: 12),
                 Expanded(

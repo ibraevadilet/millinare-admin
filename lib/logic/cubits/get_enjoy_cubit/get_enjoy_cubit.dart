@@ -55,4 +55,18 @@ class GetEnjoyCubit extends Cubit<GetEnjoyState> {
       emit(GetEnjoyState.error(e.toString()));
     }
   }
+
+  updateEnjoy(EnjoyModel model, String id, String ref) async {
+    emit(const GetEnjoyState.loading());
+    DocumentReference firestore =
+        FirebaseFirestore.instance.collection(ref).doc(id);
+    try {
+      final url = await uploadImage(File(model.image));
+      await firestore.update(model.copyWith(image: url).toJson());
+      getEnjoy(ref);
+      emit(const GetEnjoyState.successAdd());
+    } catch (e) {
+      emit(GetEnjoyState.error(e.toString()));
+    }
+  }
 }

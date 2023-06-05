@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:millioner_admin/features/enjoys/enjoy_detail_screen.dart';
+import 'package:millioner_admin/features/enjoys/enjoy_redactor_screen.dart';
 import 'package:millioner_admin/helpers/app_colors.dart';
 import 'package:millioner_admin/helpers/app_text_styles.dart';
 import 'package:millioner_admin/logic/cubits/get_enjoy_cubit/get_enjoy_cubit.dart';
@@ -44,21 +45,46 @@ class EnjoyWidget extends StatelessWidget {
             borderRadius: BorderRadius.circular(12),
             color: AppColors.colorFED5E4LightBlue,
           ),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
+          child: Row(
             children: [
-              Text(
-                'Тема: ${model.title}',
-                style: AppTextStyles.s16W400(),
+              Expanded(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      'Тема: ${model.title}',
+                      style: AppTextStyles.s16W400(),
+                    ),
+                    const SizedBox(height: 5),
+                    Text(
+                      'Описание: ${model.description}',
+                      maxLines: 3,
+                      overflow: TextOverflow.ellipsis,
+                      style: AppTextStyles.s16W400(),
+                    ),
+                    const SizedBox(height: 5),
+                  ],
+                ),
               ),
-              const SizedBox(height: 5),
-              Text(
-                'Описание: ${model.description}',
-                maxLines: 3,
-                overflow: TextOverflow.ellipsis,
-                style: AppTextStyles.s16W400(),
-              ),
-              const SizedBox(height: 5),
+              const SizedBox(width: 12),
+              InkWell(
+                onTap: () async {
+                  await Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => EnjoyRedactorScreen(
+                        model: model,
+                        ref: ref,
+                      ),
+                    ),
+                  );
+                  context.read<GetEnjoyCubit>().getEnjoy(ref);
+                },
+                child: const Icon(
+                  Icons.edit,
+                  color: Colors.white,
+                ),
+              )
             ],
           ),
         ),

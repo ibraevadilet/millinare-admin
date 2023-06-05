@@ -24,7 +24,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       scaffoldMessengerKey: scaffoldKey,
       debugShowCheckedModeBanner: false,
-      title: 'Daily BMI Calculator',
+      title: 'Millionaire Admin',
       theme: ThemeData(
         primarySwatch: Colors.blue,
         splashColor: Colors.transparent,
